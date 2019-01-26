@@ -8,7 +8,8 @@ public class HitDonki : MonoBehaviour
 {
 
     public static List<GameObject> donkies = new List<GameObject>();
-    public float hitForce = 1000f;
+    public float hitForce = 500f;
+    public GameObject target;
 
     private void Update()
     {
@@ -22,11 +23,8 @@ public class HitDonki : MonoBehaviour
     {
         foreach (GameObject d in donkies)
         {
-            d.GetComponent<NavMeshAgent>().enabled = false;
-            Rigidbody r = d.GetComponent<Rigidbody>();
-            Vector3 dir = (d.transform.position - transform.position).normalized;
-            d.GetComponent<EnemyAi>().beenHit = true;
-            StartCoroutine(Smash(r, dir));
+            Vector3 dir = (target.transform.position - transform.position).normalized;
+            d.GetComponent<EnemyAi>().GetHit(dir, hitForce);
         }
     }
 
@@ -34,6 +32,7 @@ public class HitDonki : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
+            r.isKinematic = false;
             r.AddForce(dir * hitForce);
             yield return null;
         }

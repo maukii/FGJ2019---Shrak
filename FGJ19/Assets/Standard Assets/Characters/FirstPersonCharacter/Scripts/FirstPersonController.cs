@@ -80,7 +80,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (speedTime <= 0)
             {
                 canSpeed = false;
-                m_WalkSpeed = 5;
+                m_WalkSpeed = 10;
+                m_Camera.fieldOfView = 90;
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
@@ -205,7 +206,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (other.gameObject.tag == "Speed")
             {
                 speedTime = 10;
-                m_WalkSpeed = 15;
+                m_WalkSpeed = 20;
+                m_Camera.fieldOfView = 100;
                 canSpeed = true;
             }
         }

@@ -7,7 +7,7 @@ public class MuhSwamp : MonoBehaviour
 {
     [SerializeField] Slider muhEnergy;
     [SerializeField] bool canHit;
-    [SerializeField] float timeToHit = 5f;
+    [SerializeField] float timeToHit = 3f;
 
     void Start()
     {
@@ -33,17 +33,20 @@ public class MuhSwamp : MonoBehaviour
 
             if (timeToHit <= 0)
             {
-                timeToHit = 5f;
+                timeToHit = 3f;
                 muhEnergy.value -= 1;
+                GetComponent<BoxCollider>().enabled = true;
+                canHit = false;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<NavMeshAgent>() == null)
+        if (other.gameObject.GetComponent<NavMeshAgent>() == null || other.gameObject.GetComponent<NavMeshAgent>() != null)
         {
             canHit = false;
+            timeToHit = 3f;
         }
     }
 }

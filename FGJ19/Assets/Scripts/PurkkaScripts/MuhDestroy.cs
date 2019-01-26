@@ -2,7 +2,7 @@
 
 public class MuhDestroy : MonoBehaviour
 {
-    private float rotateSpeed = 5f;
+    private float rotateSpeed = 8f;
     private MuhPickups SystemCall;
     public Transform MySpawnPoint;
 
@@ -13,7 +13,7 @@ public class MuhDestroy : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.forward * Time.deltaTime * rotateSpeed);
+        transform.Rotate(0,1,0 * Time.deltaTime * rotateSpeed);
     }
 
     void OnTriggerEnter(Collider col)

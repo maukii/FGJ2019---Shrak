@@ -35,7 +35,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
-
+        [SerializeField] float speedTime;
+        [SerializeField] bool canSpeed;
         // Use this for initialization
         private void Start()
         {
@@ -70,6 +71,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
             {
                 m_MoveDir.y = 0f;
+            }
+
+            if (canSpeed)
+            {
+                speedTime -= Time.deltaTime;
+            }
+            if (speedTime <= 0)
+            {
+                canSpeed = false;
+                m_WalkSpeed = 5;
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
@@ -184,12 +195,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-
         private void RotateView()
         {
             m_MouseLook.LookRotation(transform, m_Camera.transform);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Speed")
+            {
+                speedTime = 10;
+                m_WalkSpeed = 15;
+                canSpeed = true;
+            }
+        }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {

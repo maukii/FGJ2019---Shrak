@@ -32,4 +32,12 @@ public class EnemyAi : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Door")
+        {
+            agent.enabled = false;
+        }
+    }
 }

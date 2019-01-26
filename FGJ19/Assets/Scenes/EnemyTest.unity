@@ -976,10 +976,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSController
       objectReference: {fileID: 0}
-    - target: {fileID: 1042086652, guid: d73ee0e7dc7b17146bb4934a466c9221, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 1042086657, guid: d73ee0e7dc7b17146bb4934a466c9221, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

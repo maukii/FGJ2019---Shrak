@@ -41,16 +41,18 @@ public class DonkeyShrekt : MonoBehaviour
 
     IEnumerator SkyIsTheLimit()
     {
+        Vector3 pos = transform.position + UnityEngine.Random.insideUnitSphere;
+
         yield return new WaitForSeconds(0.02f);
-        Vector3 explosionPos = transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+        //Vector3 explosionPos = transform.position;
+        Collider[] colliders = Physics.OverlapSphere(pos, radius);
         foreach (Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             if (rb != null)
             {
-                rb.AddExplosionForce(power, explosionPos, radius, upforce, ForceMode.Impulse);
+                rb.AddExplosionForce(power, pos, radius, upforce, ForceMode.Impulse);
             }
         }
     }

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1042086656}
   - component: {fileID: 1042086655}
   - component: {fileID: 1042086654}
+  - component: {fileID: 1045820993395552382}
   m_Layer: 0
   m_Name: FPSController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,6 +189,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1045820993395552382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042086652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d77b1e245c0724d8e3713ed838670c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitForce: 1000
+  donkies: []
 --- !u!1 &2016839167
 GameObject:
   m_ObjectHideFlags: 0

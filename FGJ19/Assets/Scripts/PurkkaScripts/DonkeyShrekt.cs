@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DonkeyShrekt : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class DonkeyShrekt : MonoBehaviour
 
     [SerializeField] bool canhit;
 
+    NavMeshAgent navAgent;
+
+    void Awake()
+    {
+        navAgent = GetComponent<NavMeshAgent>();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -17,7 +25,8 @@ public class DonkeyShrekt : MonoBehaviour
             canhit = true;
             if (canhit && Input.GetMouseButtonDown(0))
             {
-                SkyIsTheLimit();
+                navAgent.enabled = false;
+                StartCoroutine(SkyIsTheLimit());
             }
         }
     }
@@ -30,8 +39,9 @@ public class DonkeyShrekt : MonoBehaviour
         }
     }
 
-    void SkyIsTheLimit()
+    IEnumerator SkyIsTheLimit()
     {
+        yield return new WaitForSeconds(0.02f);
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders)
@@ -39,7 +49,9 @@ public class DonkeyShrekt : MonoBehaviour
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             if (rb != null)
+            {
                 rb.AddExplosionForce(power, explosionPos, radius, upforce, ForceMode.Impulse);
+            }
         }
     }
 }

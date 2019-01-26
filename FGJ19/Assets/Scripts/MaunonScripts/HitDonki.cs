@@ -7,19 +7,18 @@ using UnityEngine.AI;
 public class HitDonki : MonoBehaviour
 {
 
-    public float hitForce = 1000f;
     public static List<GameObject> donkies = new List<GameObject>();
+    public float hitForce = 1000f;
 
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            if(donkies.Count > 0)
-                ShrakSmash();
+            ShrakSmash();
         }
     }
 
-    private void ShrakSmash()
+    void ShrakSmash()
     {
         foreach (GameObject d in donkies)
         {

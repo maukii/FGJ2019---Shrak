@@ -15,7 +15,7 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        GameObject target = GameObject.FindGameObjectWithTag("Goal").gameObject;
+        GameObject target = GameObject.FindGameObjectWithTag("Door").gameObject;
         agent.destination = target.transform.position;
     }
 

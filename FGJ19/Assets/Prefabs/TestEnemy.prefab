@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2659524027613976776}
   - component: {fileID: 8832190602128229151}
   - component: {fileID: 5495337156263534777}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TestEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,3 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beenHit: 0
   timeBeforeBoom: 1
+  rotMultiplier: 100

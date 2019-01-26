@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyAi : MonoBehaviour
 {
 
+    Rigidbody rb;
     NavMeshAgent agent;
     public bool beenHit = false;
     public float timeBeforeBoom = 1f;
@@ -14,23 +15,10 @@ public class EnemyAi : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         GameObject target = GameObject.FindGameObjectWithTag("Door").gameObject;
         agent.destination = target.transform.position;
-    }
-
-    private void Update()
-    {
-        if(beenHit)
-        {
-            timeBeforeBoom -= Time.deltaTime;
-            if(timeBeforeBoom <= 0)
-            {
-                Debug.Log("BOOM");
-                HitDonki.donkies.Remove(gameObject);
-                Destroy(gameObject);
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,5 +27,10 @@ public class EnemyAi : MonoBehaviour
         {
             agent.enabled = false;
         }
+    }
+
+    public void GetHit(Vector3 dir, float hitforce)
+    {
+
     }
 }

@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ShoutBullet : MonoBehaviour
 {
+
+    Rigidbody rb;
 
     public float lifetime = 2f;
     public float bulletSpeed = 10f;
     public Vector3 direction;
 
+    public float explodionRadius = 3f;
+    public float explosionForce = 500f;
+
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
         Destroy(gameObject, lifetime);
     }
 
@@ -22,10 +30,22 @@ public class ShoutBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<NavMeshAgent>() != null)
+        Vector3 dir = (other.transform.position - transform.position).normalized;
+
+        if (other.gameObject.GetComponent<NavMeshAgent>() != null)
         {
-            HitDonki.donkies.Remove(other.gameObject);
-            Destroy(other.gameObject);
+            other.GetComponent<EnemyAi>().GetHit(dir, explosionForce);
+        }
+        else
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, explodionRadius);
+            foreach (Collider c in hits)
+            {
+                if(c.GetComponent<EnemyAi>() != null)
+                {
+                    c.GetComponent<EnemyAi>().GetHit(dir, explosionForce);
+                }
+            }
         }
     }
 

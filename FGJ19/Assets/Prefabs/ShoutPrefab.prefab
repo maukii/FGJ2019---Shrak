@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2412919308870897249}
   - component: {fileID: 1604862097197144905}
   - component: {fileID: 993944675388140636}
-  m_Layer: 9
+  - component: {fileID: 3798638466760769277}
+  m_Layer: 10
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,6 +63,7 @@ MonoBehaviour:
   lifetime: 2
   bulletSpeed: 50
   direction: {x: 0, y: 0, z: 0}
+  explosionForce: 500
 --- !u!198 &1604862097197144905
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4728,6 +4730,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!54 &3798638466760769277
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3871282951806257260}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7074588731688010843
 GameObject:
   m_ObjectHideFlags: 0
@@ -4739,7 +4757,7 @@ GameObject:
   - component: {fileID: 4209087370932511244}
   - component: {fileID: 7586637270519107655}
   - component: {fileID: 9215702339880746613}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ShoutPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

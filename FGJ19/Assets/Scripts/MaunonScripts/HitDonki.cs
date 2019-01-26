@@ -7,25 +7,25 @@ using UnityEngine.AI;
 public class HitDonki : MonoBehaviour
 {
 
+    public static List<GameObject> donkies = new List<GameObject>();
     public float hitForce = 1000f;
-    public List<GameObject> donkies = new List<GameObject>();
 
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            if(donkies.Count > 0)
-                ShrakSmash();
+            ShrakSmash();
         }
     }
 
-    private void ShrakSmash()
+    void ShrakSmash()
     {
         foreach (GameObject d in donkies)
         {
             d.GetComponent<NavMeshAgent>().enabled = false;
             Rigidbody r = d.GetComponent<Rigidbody>();
             Vector3 dir = (d.transform.position - transform.position).normalized;
+            d.GetComponent<EnemyAi>().beenHit = true;
             StartCoroutine(Smash(r, dir));
         }
     }

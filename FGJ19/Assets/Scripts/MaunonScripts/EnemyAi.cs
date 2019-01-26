@@ -7,15 +7,29 @@ public class EnemyAi : MonoBehaviour
 {
 
     NavMeshAgent agent;
+    public bool beenHit = false;
+    public float timeBeforeBoom = 1f;
+
+    float timer;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = Vector3.zero;
+        GameObject target = GameObject.FindGameObjectWithTag("Door").gameObject;
+        agent.destination = target.transform.position;
     }
 
-    void Update()
+    private void Update()
     {
-
+        if(beenHit)
+        {
+            timeBeforeBoom -= Time.deltaTime;
+            if(timeBeforeBoom <= 0)
+            {
+                Debug.Log("BOOM");
+                HitDonki.donkies.Remove(gameObject);
+                Destroy(gameObject);
+            }
+        }
     }
 }

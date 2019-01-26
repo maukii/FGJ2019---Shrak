@@ -8,9 +8,10 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject enemyPrefab;
     public Transform[] spawnPositions;
-    public float timer;
+    public float timeBetweenSpawns = 5f;
+    public Transform target;
 
-    float timeBetweenSpawns = 5f;
+    float timer;
 
     private void Update()
     {

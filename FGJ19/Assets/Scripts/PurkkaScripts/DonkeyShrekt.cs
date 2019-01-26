@@ -44,7 +44,6 @@ public class DonkeyShrekt : MonoBehaviour
         Vector3 pos = transform.position + UnityEngine.Random.insideUnitSphere;
 
         yield return new WaitForSeconds(0.02f);
-        //Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(pos, radius);
         foreach (Collider hit in colliders)
         {

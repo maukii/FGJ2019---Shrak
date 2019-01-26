@@ -28,16 +28,6 @@ public class HitDonki : MonoBehaviour
         }
     }
 
-    IEnumerator Smash(Rigidbody r, Vector3 dir)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            r.isKinematic = false;
-            r.AddForce(dir * hitForce);
-            yield return null;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<NavMeshAgent>() != null && !donkies.Contains(other.gameObject))

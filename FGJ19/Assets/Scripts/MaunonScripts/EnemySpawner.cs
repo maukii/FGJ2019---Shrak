@@ -13,7 +13,9 @@ public class EnemySpawner : MonoBehaviour
     public float timeBetweenSpawns = 6f;
     public Transform target;
     public Text timerText;
+    public Text winnerText;
     private float time = 180f;
+    private bool wiineri = false;
 
     float timer;
 
@@ -66,6 +68,15 @@ public class EnemySpawner : MonoBehaviour
         if (time < 20)
         {
             timeBetweenSpawns = 2f;
+        }
+
+        if (time <= 0)
+        {
+            timerText.enabled = false;
+            foreach (GameObject g in HitDonki.donkies)
+            {
+                g.GetComponent<EnemyAi>().GetHit(Vector3.zero, 0);
+            }
         }
 
         if(timer <= 0)

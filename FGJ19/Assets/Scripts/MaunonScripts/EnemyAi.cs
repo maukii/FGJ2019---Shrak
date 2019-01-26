@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class EnemyAi : MonoBehaviour
 {
 
+    public GameObject explosionParticles;
+
     Rigidbody rb;
     NavMeshAgent agent;
     public bool beenHit = false;
@@ -62,6 +64,8 @@ public class EnemyAi : MonoBehaviour
 
     private void OnDisable()
     {
+        Instantiate(explosionParticles, transform.position, Quaternion.identity);
+
         if(HitDonki.donkies.Contains(gameObject))
         {
             HitDonki.donkies.Remove(gameObject);

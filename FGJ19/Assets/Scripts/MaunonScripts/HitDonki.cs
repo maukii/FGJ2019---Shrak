@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
+[RequireComponent(typeof(AudioSource))]
 public class HitDonki : MonoBehaviour
 {
 
+    AudioSource source;
+    public AudioClip aargh;
     public Animator anim;
 
     public static List<GameObject> donkies = new List<GameObject>();
@@ -14,6 +18,12 @@ public class HitDonki : MonoBehaviour
     public GameObject target;
 
     float cooldown = 1f;
+
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+        source.clip = aargh;
+    }
 
     private void Update()
     {
@@ -36,6 +46,9 @@ public class HitDonki : MonoBehaviour
 
     void ShrakSmash()
     {
+        source.pitch = 1 + UnityEngine.Random.Range(-0.3f, 0.3f); 
+        source.PlayOneShot(aargh);
+
         foreach (GameObject d in donkies)
         {
             Vector3 dir = (target.transform.position - transform.position).normalized;

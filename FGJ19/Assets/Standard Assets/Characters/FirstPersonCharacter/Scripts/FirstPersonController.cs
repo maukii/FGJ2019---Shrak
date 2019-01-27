@@ -86,6 +86,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir.y = 0f;
             }
 
+            m_PreviouslyGrounded = m_CharacterController.isGrounded;
+        
+
             if (canFov)
             {
                 m_Camera.fieldOfView += Time.deltaTime * 4f;
@@ -146,6 +149,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (m_CharacterController.isGrounded)
             {
                 m_MoveDir.y = -m_StickToGroundForce;
+
+                if (m_Jump)
+                {
+                    m_MoveDir.y = m_JumpSpeed;
+                    m_Jump = false;
+                    m_Jumping = true;
+                }
             }
             else
             {
@@ -197,7 +207,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             m_Camera.transform.localPosition = newCameraPosition;
         }
-
 
         private void GetInput(out float speed)
         {

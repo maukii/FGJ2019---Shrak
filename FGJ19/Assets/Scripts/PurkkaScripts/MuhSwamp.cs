@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class MuhSwamp : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MuhSwamp : MonoBehaviour
     [SerializeField] float timeToHit = 1.5f;
     public GameObject Lose;
     public GameObject time;
+    public GameObject timer;
 
     void Start()
     {
@@ -43,8 +45,17 @@ public class MuhSwamp : MonoBehaviour
         }
         if (muhEnergy.value <= 0)
         {
+            StartCoroutine(LoadMenu());
             Lose.SetActive(true);
+            time.SetActive(false);
+            timer.SetActive(false);
         }
+    }
+
+    IEnumerator LoadMenu()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(1);
     }
 
     private void OnTriggerExit(Collider other)

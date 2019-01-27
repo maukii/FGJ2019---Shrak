@@ -8,6 +8,7 @@ public class MuhMenu : MonoBehaviour
 
     void Start()
     {
+        Screen.lockCursor = false;
         anim = GetComponent<Animator>();
     }
 

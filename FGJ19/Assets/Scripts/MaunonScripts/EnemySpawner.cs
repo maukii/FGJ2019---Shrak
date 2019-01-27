@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
 
     public GameObject enemyPrefab;
     public Transform[] spawnPositions;
-    public float timeBetweenSpawns = 6f;
+    public float timeBetweenSpawns = 5f;
     public Transform target;
     public Text timerText;
     public Text winnerText;
@@ -52,28 +53,29 @@ public class EnemySpawner : MonoBehaviour
 
         if (time < 140)
         {
-            timeBetweenSpawns = 5f;
+            timeBetweenSpawns = 4f;
         }
 
         if (time < 100)
         {
-            timeBetweenSpawns = 4f;
+            timeBetweenSpawns = 3f;
         }
 
         if (time < 60)
         {
-            timeBetweenSpawns = 3f;
+            timeBetweenSpawns = 2f;
         }
 
-        if (time < 20)
+        if (time < 30)
         {
-            timeBetweenSpawns = 2f;
+            timeBetweenSpawns = 1f;
         }
 
         if (time <= 0)
         {
             timerText.enabled = false;
             winnerText.enabled = true;
+            StartCoroutine(LoadMenu());
             foreach (GameObject g in HitDonki.donkies)
             {
                 g.GetComponent<EnemyAi>().GetHit(Vector3.zero, 0);
@@ -85,6 +87,12 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy();
             timer = timeBetweenSpawns;
         }
+    }
+
+    IEnumerator LoadMenu()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(1);
     }
 
     private void SpawnEnemy()

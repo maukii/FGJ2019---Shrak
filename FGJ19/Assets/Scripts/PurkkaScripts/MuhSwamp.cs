@@ -8,6 +8,8 @@ public class MuhSwamp : MonoBehaviour
     [SerializeField] Slider muhEnergy;
     [SerializeField] bool canHit;
     [SerializeField] float timeToHit = 1.5f;
+    public GameObject Lose;
+    public GameObject time;
 
     void Start()
     {
@@ -38,6 +40,10 @@ public class MuhSwamp : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = true;
                 canHit = false;
             }
+        }
+        if (muhEnergy.value <= 0)
+        {
+            Lose.SetActive(true);
         }
     }
 

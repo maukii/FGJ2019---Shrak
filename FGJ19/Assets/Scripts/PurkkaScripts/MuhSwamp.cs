@@ -7,7 +7,7 @@ public class MuhSwamp : MonoBehaviour
 {
     [SerializeField] Slider muhEnergy;
     [SerializeField] bool canHit;
-    [SerializeField] float timeToHit = 3f;
+    [SerializeField] float timeToHit = 1.5f;
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class MuhSwamp : MonoBehaviour
 
             if (timeToHit <= 0)
             {
-                timeToHit = 3f;
+                timeToHit = 1.5f;
                 muhEnergy.value -= 1;
                 GetComponent<BoxCollider>().enabled = true;
                 canHit = false;

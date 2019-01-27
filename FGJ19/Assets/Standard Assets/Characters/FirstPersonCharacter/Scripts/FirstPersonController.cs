@@ -39,6 +39,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         [SerializeField] float speedTime;
         [SerializeField] bool canSpeed;
+        [SerializeField] bool canFov;
+        [SerializeField] bool canNotFov;
         // Use this for initialization
         private void Start()
         {
@@ -54,7 +56,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        // Update is called once per frame
+        // Welcome to IF hell
         private void Update()
         {          
             if(m_Input != Vector2.zero)
@@ -84,15 +86,41 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir.y = 0f;
             }
 
+            if (canFov)
+            {
+                m_Camera.fieldOfView += Time.deltaTime * 4f;
+                if (m_Camera.fieldOfView >= 100)
+                {
+                    canFov = false;
+                }
+            }
+
+            if(canNotFov)
+            {
+                m_Camera.fieldOfView -= Time.deltaTime * 4f;
+                if (m_Camera.fieldOfView <= 90)
+                {
+                    canNotFov = false;
+                }
+            }
+
             if (canSpeed)
             {
                 speedTime -= Time.deltaTime;
             }
+
+            if (speedTime < 2)
+            {
+                if (speedTime > 1)
+                {
+                    canNotFov = true;
+                }
+            }
+
             if (speedTime <= 0)
             {
                 canSpeed = false;
                 m_WalkSpeed = 10;
-                m_Camera.fieldOfView = 90;
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
@@ -218,7 +246,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 speedTime = 10;
                 m_WalkSpeed = 20;
-                m_Camera.fieldOfView = 100;
+                canFov = true;
                 canSpeed = true;
             }
         }

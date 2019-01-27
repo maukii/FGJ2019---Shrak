@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     public Text timerText;
     public Text winnerText;
     private float time = 180f;
-    private bool wiineri = false;
+    private bool wiineri;
 
     float timer;
 
@@ -73,6 +73,7 @@ public class EnemySpawner : MonoBehaviour
         if (time <= 0)
         {
             timerText.enabled = false;
+            winnerText.enabled = true;
             foreach (GameObject g in HitDonki.donkies)
             {
                 g.GetComponent<EnemyAi>().GetHit(Vector3.zero, 0);

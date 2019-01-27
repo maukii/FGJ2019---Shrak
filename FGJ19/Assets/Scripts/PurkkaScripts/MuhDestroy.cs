@@ -2,7 +2,7 @@
 
 public class MuhDestroy : MonoBehaviour
 {
-    private float rotateSpeed = 8f;
+    private float rotateSpeed = 16f;
     private MuhPickups SystemCall;
     public Transform MySpawnPoint;
 

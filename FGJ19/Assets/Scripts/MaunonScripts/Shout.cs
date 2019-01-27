@@ -6,7 +6,9 @@ using UnityEngine;
 public class Shout : MonoBehaviour
 {
 
-    public GameObject shoutPrefab; 
+    public GameObject shoutPrefab;
+    public GameObject shoutE;
+    public GameObject shoutD;
 
     public float shoutCooldown = 5f;
     float timer;
@@ -15,8 +17,12 @@ public class Shout : MonoBehaviour
     {
         if(timer < 0)
         {
+            shoutD.SetActive(false);
+            shoutE.SetActive(true);
             if (Input.GetMouseButtonDown(1))
             {
+                shoutE.SetActive(false);
+                shoutD.SetActive(true);
                 Rawr();
                 timer = shoutCooldown;
             }

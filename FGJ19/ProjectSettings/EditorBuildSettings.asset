@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/cinematic.unity
+    guid: 34ed0175d69019e42a5e86ae887c2b96
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: 6a4373d969bf9bc44a2d04d3a3f43d31
+  - enabled: 1
+    path: Assets/Scenes/vidyagame.unity
+    guid: 97c8537de95591b4386432cf5c9ef8a6
   m_configObjects: {}

@@ -7,15 +7,30 @@ using UnityEngine.AI;
 public class HitDonki : MonoBehaviour
 {
 
+    public Animator anim;
+
     public static List<GameObject> donkies = new List<GameObject>();
     public float hitForce = 500f;
     public GameObject target;
 
+    float cooldown = 1f;
+
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        
+
+        if(cooldown <= 0)
         {
-            ShrakSmash();
+            if(Input.GetMouseButtonDown(0))
+            {
+                ShrakSmash();
+                cooldown = 1f;
+                anim.SetTrigger("Hit");
+            }
+        }
+        else
+        {
+            cooldown -= Time.deltaTime;
         }
     }
 

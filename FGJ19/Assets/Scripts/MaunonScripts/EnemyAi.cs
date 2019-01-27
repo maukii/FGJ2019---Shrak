@@ -6,6 +6,11 @@ using UnityEngine.AI;
 public class EnemyAi : MonoBehaviour
 {
 
+    public AudioClip[] aargh;
+
+    public AudioClip[] randomSounds;
+
+    public AudioSource source;
     public GameObject explosionParticles;
 
     Rigidbody rb;
@@ -16,8 +21,12 @@ public class EnemyAi : MonoBehaviour
 
     float timer;
 
+    public float audioTimer = 5f;
+    public float timeBetweenSounds = 5f;
+
     void Start()
     {
+        source = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         GameObject target = GameObject.FindGameObjectWithTag("Door").gameObject;
@@ -30,6 +39,23 @@ public class EnemyAi : MonoBehaviour
         {
             transform.Rotate(Time.deltaTime * (1 + Random.value) * rotMultiplier, Time.deltaTime * (1 + Random.value) * rotMultiplier, Time.deltaTime * (1 + Random.value) * rotMultiplier);
         }
+
+        if(audioTimer < 0)
+        {
+            PlayRandomAudio();
+            audioTimer = timeBetweenSounds;
+        }
+        else
+        {
+            audioTimer -= Time.deltaTime;
+        }
+
+    }
+
+    void PlayRandomAudio()
+    {
+        int index = UnityEngine.Random.Range(0, randomSounds.Length);
+        source.PlayOneShot(randomSounds[index]);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +68,10 @@ public class EnemyAi : MonoBehaviour
 
     public void GetHit(Vector3 dir, float hitforce)
     {
+
+        int index = UnityEngine.Random.Range(0, aargh.Length);
+        source.PlayOneShot(aargh[index]);
+
         agent.enabled = false;
         rb.isKinematic = false;
         beenHit = true;
